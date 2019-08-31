@@ -18,4 +18,4 @@ Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to comp
 
 ## Contact
 
-If there is anything questions, please email me: yfeng28@ur.rochester.edu.
+If there is any question, please email me: yfeng28@ur.rochester.edu.
