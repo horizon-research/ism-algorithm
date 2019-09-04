@@ -76,6 +76,30 @@ The first three fields in each comparison stand for:
   2. the minimum difference between ground truth and result;
   3. the average difference between ground truth and result;
 
+### FlowNet/DispNet
+
+To run FlowNet and DispNet along with our ISM algorithm, please first clone and setup [Flownet2](https://github.com/lmb-freiburg/flownet2) from the paper by E. Ilg et al. 
+
+After you get FlowNet running successfully, copy the two scripts from `script/flownet` to their `./scripts` directory.
+
+And then, download the "[sceneflow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to a root directory and untar the dataset.
+
+
+To run the ISM algorithm, run the command below:
+
+```
+  $ ./run-motion-compensate-bm.py \
+         ../models/FlowNet2-c/FlowNet2-c_weights.caffemodel \
+         ../models/FlowNet2-c/FlowNet2-c_deploy.prototxt.template \
+         --ew 4 --path ${PATH}
+
+```
+You need to specify the path to the dataset, in this case, it is the root directory of flownet2.
+
+There is also a batch-processing Bash script you can use to test on all the dataset. Just simply run:
+```
+  $ ./test_model_bm.sh
+```
 
 ## Some details about this skeleton code
 
