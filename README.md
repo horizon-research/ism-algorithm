@@ -105,6 +105,23 @@ There is also a batch-processing Bash script you can use to test on all the data
 
 Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames。 Other dense optical flow algrithm can also be used to substitute this function in order to get the disparity map from next subsequent frames.
 
+## Citing
+
+This project implements the configurable point cloud registration pipeline described in the following paper:
+
+Y. Feng,  P. Whatmough, and Y. Zhu, "ASV: Accelerated Stereo Vision System", In Proc. of MICRO, 2019.
+
+Please kindly consider citing this paper in your publications if it helps your research.
+```
+@inproceedings{yu2019asv,
+  title={ASV: Accelerated Stereo Vision System},
+  author={Feng, Yu and Whatmough, Paul and Zhu, Yuhao},
+  booktitle={Proceedings of the 52th International Symposium on Microarchitecture},
+  year={2019},
+  organization={ACM}
+}
+```
+
 ## Contact
 
 If there is any question, please email me: yfeng28@ur.rochester.edu.
