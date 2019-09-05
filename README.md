@@ -112,6 +112,54 @@ There is also a batch-processing Bash script you can use to test on a set of dat
 ```
 Then, you can check out results from `result` directory as previously shown. The format of result is the same as the one in PSMNet.
 
+
+### GC-Net
+
+GC-Net is from a 2017 CVPR paper: *End-to-End Learning of Geometry and Context for Deep Stereo Regression* by A. Kendall et al. We used the TensorRT version from NVDIA. To check out the stereo DNN, please to go this [link](https://github.com/NVIDIA-AI-IOT/redtail). Clone this repo:
+```
+  $ git clone https://github.com/NVIDIA-AI-IOT/redtail.git 
+```
+And then, redirect to the `stereoDNN` directory.
+```
+  $ cd redtail/stereoDNN
+```
+And follow the instructions to build the inference code (release version). 
+After build succeeds, you should see a `nvstereo` binary in `bin` directory.
+
+Now, you can make a new directory in the root directory to test our ISM algorithm.
+```
+  $ mkdir ism
+```
+
+Then, copy both binary and its weights into this directory.
+```
+  $ cp bin/nvstereo ism/nvstereo
+  $ cp ./models/ResNet-18/TensorRT/trl_weights.bin ism/trl_weights.bin
+```
+
+Next, you can follow the previous instruction to download the dataset. 
+For the demostration purpose, we choose "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)". Download 
+both "RGB images" and "Disparity" in the same directory `PSMNet` and untar them.
+
+```
+  $ tar -xzvf monkaa_frames_cleanpass.tar
+  $ tar -xzvf monkaa_disparity.tar.bz2
+```
+
+After untaring both "RGB image" and "Disparity" tar, you will see two folders,
+`frames_cleanpass` and `disparity`, in the directory.
+
+Last, copy two script from our directory, `stereo_script/gcnet`, to `ism` directory.
+Now, you can run our ism algorithm using:
+```
+$ ./gcnet_with_ism.py \
+       --ew 4 --path ${PATH}
+```
+The ${PATH} is the path lead to one particular dataset.
+
+You can also use our script `test_dataset` to run multiple dataset together.
+
+
 ## Implement your own ISM
 
 In the `ism_skeleton.py`, it gives a skeleton code for using Invariant-based motion compensation with any Stereo DNN model. There are several steps in TODO list in order to make this algorithm works.
