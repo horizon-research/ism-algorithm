@@ -32,7 +32,7 @@ Next, copy two scripts from `script/psmnet` from our repository to their root di
 
 A simple example of using `psmnet_with_ism.py`:
 ```
-  $ python multi_frame_compensation_bm.py \
+  $ python psmnet_with_ism.py \
        --maxdisp 192 --model stackhourglass \
        --loadmodel pretrained_model_KITTI2015.tar \
        --saveimg False --datapath ${PATH} \
@@ -79,6 +79,11 @@ The first three fields in each comparison stand for:
 
 To run FlowNet and DispNet along with our ISM algorithm, please first clone and setup [Flownet2](https://github.com/lmb-freiburg/flownet2) from the paper by E. Ilg et al. 
 
+```
+  $ git clone https://github.com/lmb-freiburg/flownet2.git
+  $ cd flownet2
+```
+
 Assuming now you are in the FlowNet root directory, after you get FlowNet running successfully, copy the two scripts from `script/flownet` to their `./scripts` directory.
 
 And then, download the "[sceneflow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to a root directory and untar the dataset.
@@ -101,13 +106,11 @@ You can switch to DispNet by replace `FlowNet2-c` to `FLowNet2-S`.
 
 You need to specify the path to the dataset, in this case, it is the root directory of flownet2.
 
-There is also a batch-processing Bash script you can use to test on all the dataset. Just simply run:
+There is also a batch-processing Bash script you can use to test on a set of datasets. Just simply run:
 ```
   $ ./test_dataset.sh
 ```
-Then, you can check out all results from `result` as previously shown.
-
-The format of result is the same as the one in PSMNet.
+Then, you can check out results from `result` directory as previously shown. The format of result is the same as the one in PSMNet.
 
 ## Implement your own ISM
 
