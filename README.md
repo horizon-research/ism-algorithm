@@ -2,7 +2,7 @@
 
 This ISM algorithm is a plug-in supportive repository to accelerate a general stereo vision DNN using Invariant-based Stereo Matching for continuous stereo vision application from our paper, *ASV: Accelerated Stereo Vision System*.
 
-We provide some plug-in scripts for some popular stereo DNNs.
+We provide some plug-in scripts for several popular stereo DNNs.
 
 ## Plug-in scripts
 
@@ -14,7 +14,12 @@ In the directory `stereo_script`, it contains several scripts that we applied ou
 
 To use our script, please first check out this [link](https://github.com/JiaRenChang/PSMNet) and follow the instructions to set up PSMNet model appropriately.
 
-Next, you can download one of the stereo vision datasets. For the demostration purpose, we choose "[sceneflow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)". Download both "RGB images" and "Disparity" in the same directory `PSMNet` and untar them.
+```
+  $ git clone https://github.com/JiaRenChang/PSMNet.git
+  $ cd PSMNet
+```
+
+Next, you can download one of the stereo vision datasets. For the demostration purpose, we choose "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)". Download both "RGB images" and "Disparity" in the same directory `PSMNet` and untar them.
 
 ```
   $ tar -xzvf monkaa_frames_cleanpass.tar
@@ -23,11 +28,11 @@ Next, you can download one of the stereo vision datasets. For the demostration p
 
 After untaring both "RGB image" and "Disparity" tar, you will see two folders, `frames_cleanpass` and `disparity`, in the directory.
 
-Next, copy two scripts from `script/psmnet` from our repository to their root directory, `PSMNet`. `multi_frame_compensation_bm.py` is a modified script that adds our ISM algorithm into their orignal test python script. The `test_mutli_bm.sh` is a bash script to test the ISM algorithm on different datasets in `frames_cleanpass` folder and place each test result into a folder named `result`.
+Next, copy two scripts from `script/psmnet` from our repository to their root directory, `PSMNet`. `psmnet_with_ism.py` is a modified script that adds our ISM algorithm into their orignal test python script. The `test_dataset.sh` is a bash script to test the ISM algorithm on different datasets in `frames_cleanpass` folder and place each test result into a folder named `result`.
 
-A simple example of using `multi_frame_compensation_bm.py`:
+A simple example of using `psmnet_with_ism.py`:
 ```
-  $ python multi_frame_compensation_bm.py \
+  $ python psmnet_with_ism.py \
        --maxdisp 192 --model stackhourglass \
        --loadmodel pretrained_model_KITTI2015.tar \
        --saveimg False --datapath ${PATH} \
@@ -38,10 +43,10 @@ You need to specify the name of dataset as `${PATH}` in the `frames_cleanpass` t
 
 To test a set of dataset, you can run
 ```
-  $ ./test_multi_bm.sh
+  $ ./test_dataset.sh
 ```
 
-You can also modified `test_multi_bm.sh` to specify the dataset that you want to test on, using our algorithm. After finished running the test script, you can check all test results from `result` directory.
+You can also modified `test_dataset.sh` to specify the dataset that you want to test on, using our algorithm. After finished running the test script, you can check all test results from `result` directory.
 
 One of the example results is attached below: 
 
@@ -74,15 +79,24 @@ The first three fields in each comparison stand for:
 
 To run FlowNet and DispNet along with our ISM algorithm, please first clone and setup [Flownet2](https://github.com/lmb-freiburg/flownet2) from the paper by E. Ilg et al. 
 
-After you get FlowNet running successfully, copy the two scripts from `script/flownet` to their `./scripts` directory.
+```
+  $ git clone https://github.com/lmb-freiburg/flownet2.git
+  $ cd flownet2
+```
 
-And then, download the "[sceneflow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to a root directory and untar the dataset.
+Assuming now you are in the FlowNet root directory, after you get FlowNet running successfully, copy the two scripts from `script/flownet` to their `./scripts` directory.
 
+And then, download the "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to a root directory and untar the dataset.
+
+```
+  $ tar -xzvf monkaa_frames_cleanpass.tar
+  $ tar -xzvf monkaa_disparity.tar.bz2
+```
 
 To run the ISM algorithm with FlowNet-C, run the command below:
 
 ```
-  $ ./run-motion-compensate-bm.py \
+  $ ./flownet_with_ism.py \
          ../models/FlowNet2-c/FlowNet2-c_weights.caffemodel \
          ../models/FlowNet2-c/FlowNet2-c_deploy.prototxt.template \
          --ew 4 --path ${PATH}
@@ -92,15 +106,13 @@ You can switch to DispNet by replace `FlowNet2-c` to `FLowNet2-S`.
 
 You need to specify the path to the dataset, in this case, it is the root directory of flownet2.
 
-There is also a batch-processing Bash script you can use to test on all the dataset. Just simply run:
+There is also a batch-processing Bash script you can use to test on a set of datasets. Just simply run:
 ```
-  $ ./test_model_bm.sh
+  $ ./test_dataset.sh
 ```
-Then, you can check out all results from `result` as previously shown.
+Then, you can check out results from `result` directory as previously shown. The format of result is the same as the one in PSMNet.
 
-The format of result is the same as the one in PSMNet.
-
-## How to use
+## Implement your own ISM
 
 In the `ism_skeleton.py`, it gives a skeleton code for using Invariant-based motion compensation with any Stereo DNN model. There are several steps in TODO list in order to make this algorithm works.
 
@@ -108,11 +120,9 @@ First, you need to download a stereo vision dataset. For this, we recommend [KIT
 
 Second, download any stereo vision DNN network to test this code. In the `ism_skeleton.py`, you need to implement the functions `load_dnn_model` and `dnn_inference` to be able to load the stereo DNN model and use the stereo DNN model to geneerate disparity results from key frames.
 
-That's it!
+### Some details about this skeleton code
 
-## Some details about this skeleton code
-
-Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames. Other dense optical flow algrithm can also be used to substitute this function in order to get the disparity map from next subsequent frames.
+Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames. Other dense optical flow algrithm can also be used to substitute this function. The optical flow algorithm is used in one stage of ISM algorithm to get the disparity map from next subsequent frames.
 
 ## Citing
 
