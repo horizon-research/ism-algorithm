@@ -4,6 +4,10 @@ This ISM algorithm is a plug-in supportive repository to accelerate a general st
 
 We provide some plug-in scripts for several popular stereo DNNs.
 
+  * PSMNet
+  * FlowNet/DispNet
+  * GC-Net
+
 ## Plug-in scripts
 
 In the directory `stereo_script`, it contains several scripts that we applied our methods on four representative stereo DNNs. Here are some detailed instructions to run these scripts.
@@ -19,7 +23,7 @@ To use our script, please first check out this [link](https://github.com/JiaRenC
   $ cd PSMNet
 ```
 
-Next, you can download one of the stereo vision datasets. For the demostration purpose, we choose "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)". Download both "RGB images" and "Disparity" in the same directory `PSMNet` and untar them.
+Next, you can download one of the stereo vision datasets. For the demostration purpose, we choose "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)". Download both "RGB images" and "Disparity" into the same directory `PSMNet` and untar them.
 
 ```
   $ tar -xzvf monkaa_frames_cleanpass.tar
@@ -28,7 +32,7 @@ Next, you can download one of the stereo vision datasets. For the demostration p
 
 After untaring both "RGB image" and "Disparity" tar, you will see two folders, `frames_cleanpass` and `disparity`, in the directory.
 
-Next, copy two scripts from `script/psmnet` from our repository to their root directory, `PSMNet`. `psmnet_with_ism.py` is a modified script that adds our ISM algorithm into their orignal test python script. The `test_dataset.sh` is a bash script to test the ISM algorithm on different datasets in `frames_cleanpass` folder and place each test result into a folder named `result`.
+Next, copy two scripts from `script/psmnet` from our repository to their root directory, `PSMNet`. `psmnet_with_ism.py` is a modified script that adds our ISM algorithm into PSMNet orignal python script. The `test_dataset.sh` is a bash script to test the ISM algorithm on different datasets in `frames_cleanpass` folder and place each test result into a folder named `result`.
 
 A simple example of using `psmnet_with_ism.py`:
 ```
@@ -46,7 +50,7 @@ To test a set of dataset, you can run
   $ ./test_dataset.sh
 ```
 
-You can also modified `test_dataset.sh` to specify the dataset that you want to test on, using our algorithm. After finished running the test script, you can check all test results from `result` directory.
+You can also modified `test_dataset.sh` to specify the dataset that you want to test on. After finished running the test script, you can check all test results from `result` directory.
 
 One of the example results is attached below: 
 
@@ -86,7 +90,7 @@ To run FlowNet and DispNet along with our ISM algorithm, please first clone and 
 
 Assuming now you are in the FlowNet root directory, after you get FlowNet running successfully, copy the two scripts from `script/flownet` to their `./scripts` directory.
 
-And then, download the "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to a root directory and untar the dataset.
+And then, download the "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to the root directory, `flownet2`,  and untar the dataset.
 
 ```
   $ tar -xzvf monkaa_frames_cleanpass.tar
@@ -119,7 +123,7 @@ GC-Net is from a 2017 CVPR paper: *End-to-End Learning of Geometry and Context f
 ```
   $ git clone https://github.com/NVIDIA-AI-IOT/redtail.git 
 ```
-And then, redirect to the `stereoDNN` directory.
+And then, redirect to the `redtail/stereoDNN` directory.
 ```
   $ cd redtail/stereoDNN
 ```
@@ -134,7 +138,7 @@ Now, you can make a new directory in the root directory to test our ISM algorith
 Then, copy both binary and its weights into this directory.
 ```
   $ cp bin/nvstereo ism/nvstereo
-  $ cp ./models/ResNet-18/TensorRT/trl_weights.bin ism/trl_weights.bin
+  $ cp models/ResNet-18/TensorRT/trl_weights.bin ism/trl_weights.bin
 ```
 
 Next, you can follow the previous instruction to download the dataset. 
