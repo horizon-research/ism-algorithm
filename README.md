@@ -2,7 +2,7 @@
 
 This ISM algorithm is a plug-in supportive repository to accelerate a general stereo vision DNN using Invariant-based Stereo Matching for continuous stereo vision application from our paper, *ASV: Accelerated Stereo Vision System*.
 
-We provide some plug-in scripts for some popular stereo DNNs.
+We provide some plug-in scripts for several popular stereo DNNs.
 
 ## Plug-in scripts
 
@@ -19,7 +19,7 @@ To use our script, please first check out this [link](https://github.com/JiaRenC
   $ cd PSMNet
 ```
 
-Next, you can download one of the stereo vision datasets. For the demostration purpose, we choose "[sceneflow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)". Download both "RGB images" and "Disparity" in the same directory `PSMNet` and untar them.
+Next, you can download one of the stereo vision datasets. For the demostration purpose, we choose "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)". Download both "RGB images" and "Disparity" in the same directory `PSMNet` and untar them.
 
 ```
   $ tar -xzvf monkaa_frames_cleanpass.tar
@@ -86,7 +86,7 @@ To run FlowNet and DispNet along with our ISM algorithm, please first clone and 
 
 Assuming now you are in the FlowNet root directory, after you get FlowNet running successfully, copy the two scripts from `script/flownet` to their `./scripts` directory.
 
-And then, download the "[sceneflow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to a root directory and untar the dataset.
+And then, download the "[SceneFlow](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html)" dataset to a root directory and untar the dataset.
 
 ```
   $ tar -xzvf monkaa_frames_cleanpass.tar
