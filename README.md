@@ -12,7 +12,7 @@ Second, download any stereo vision DNN network to test this code. In the `ism_sk
 
 That's it!
 
-## Scripts
+## Example Scripts
 
 In the directory `stereo_script`, it contains several scripts that we applied our methods on four representative stereo DNNs. Here are some detailed instructions to run these scripts.
 
