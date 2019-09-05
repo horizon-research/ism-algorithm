@@ -15,9 +15,7 @@ PATH=.
 for i in "${arr[@]}"
 do
    echo ${i}
-   ./flownet_with_ism.py \
-       ../models/FlowNet2-c/FlowNet2-c_weights.caffemodel \
-   	   ../models/FlowNet2-c/FlowNet2-c_deploy.prototxt.template \
+   ./gcnet_with_ism.py \
        --ew 4 --path ${PATH}/${i}/ > result/${i}.txt
 done
 

@@ -15,12 +15,10 @@ declare -a arr=("eating_naked_camera2_x2" \
                 "funnyworld_x2" "lonetree_difftex_x2" \
                 "treeflight_augmented0_x2")
 
-# source /home/tigris/parsec-3.0/env.sh
-
 ## now loop through the above array
 for i in "${arr[@]}"
 do
-   python multi_frame_compensation_bm.py \
+   python psmnet_with_ism.py \
        --maxdisp 192 --model stackhourglass \
        --loadmodel pretrained_model_KITTI2015.tar \
        --saveimg False --datapath ${i}/ \

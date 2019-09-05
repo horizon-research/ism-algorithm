@@ -109,52 +109,6 @@ def writeFlow(name, flow):
     f.flush()
     f.close()
 
-# comparison function
-def compareDispx(index, flow):
-    disp = flow
-    [height, width, channel] = blob.shape
-    disp = np.absolute(np.reshape(disp, (height, width)))
-    # gt = np.float32(cv.imread(args.path+"disp/"+str(index).zfill(4)+".png", 0))
-    # this is to load PFM file
-    file = open(args.path+"disp/"+str(index).zfill(4) + ".pfm", "r")
-    gt,_ = load_pfm(file)
-    gt = np.flip(gt, 0)
-
-    print(gt.shape, disp.shape)
-    diff = np.abs(np.subtract(disp, gt))
-    max_v = np.amax(diff)
-    min_v = np.amin(diff)
-    mean_v = np.mean(diff)
-
-    print("[mean]",np.mean(diff))
-    print("[max]", max_v)
-    print("[min]", min_v)
-    print(compareError(diff))
-    return np.mean(diff)
-
-
-# comparison function
-def compareDispy(index, flow):
-    disp = flow[:,:,1:2]
-    [height, width, channel] = blob.shape
-    disp = np.absolute(np.reshape(disp, (height, width)))
-    # gt = np.float32(cv.imread(args.path+"disp/"+str(index).zfill(4)+".png", 0))
-    # this is to load PFM file
-    file = open(args.path+"disp/"+str(index).zfill(4) + ".pfm", "r")
-    gt,_ = load_pfm(file)
-    gt = np.flip(gt, 0)
-
-    print(gt.shape, disp.shape)
-    diff = np.abs(np.subtract(disp, gt))
-    max_v = np.amax(diff)
-    min_v = np.amin(diff)
-    mean_v = np.mean(diff)
-
-    print("[mean]",np.mean(diff))
-    print("[max]", max_v)
-    print("[min]", min_v)
-    print(compareError(diff))
-    return np.mean(diff)
 
 # comparison function
 def compareDisp(index, flow):
@@ -179,15 +133,6 @@ def compareDisp(index, flow):
     print(compareError(diff))
     return np.mean(diff)
 
-def compareDisp2(index, flow):
-    disp = flow
-    [height, width, channel] = blob.shape
-    disp = np.absolute(np.reshape(disp, (height, width)))
-    gt = np.float32(cv.imread(args.path+"disp/"+str(index).zfill(4)+".png", 0))
-    diff = np.abs(np.subtract(disp, gt))
-    print(np.mean(diff))
-    print(compareError(diff))
-    return np.mean(diff)
 
 # compute the error rate for the this frame
 def compareError(diff):
@@ -379,6 +324,3 @@ for index in range(1,data_size-ew, 1):
 
 
 print("[STEREO]",args.path,np.mean(compare_result))
-
-# ./run-motion-compensate.py ../models/FlowNet2-c/FlowNet2-c_weights.caffemodel ../models/FlowNet2-c/FlowNet2-c_deploy.prototxt.template
-
