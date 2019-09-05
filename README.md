@@ -107,7 +107,7 @@ The format of result is the same as the one in PSMNet.
 
 ## Some details about this skeleton code
 
-Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames。 Other dense optical flow algrithm can also be used to substitute this function in order to get the disparity map from next subsequent frames.
+Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames. Other dense optical flow algrithm can also be used to substitute this function in order to get the disparity map from next subsequent frames.
 
 ## Citing
 
