@@ -4,9 +4,9 @@ This ISM algorithm is an algorithm framework to accelerate a general stereo visi
 
 We provide some implementation of ISM algorithm for several popular stereo DNNs.
 
-  * [PSMNet](#psmnet): [Pyramid Stereo Matching Network](https://arxiv.org/abs/1803.08669)
-  * [FlowNet/DispNet](#flownetdispnet): [FlowNet 2.0: Evolution of Optical Flow Estimation with Deep Networks](https://arxiv.org/abs/1612.01925)
-  * [GC-Net](#gc-net): [End-to-End Learning of Geometry and Context for Deep Stereo Regression](https://arxiv.org/abs/1703.04309)
+  * [PSMNet](#psmnet): ["Pyramid Stereo Matching Network"](https://arxiv.org/abs/1803.08669)
+  * [FlowNet/DispNet](#flownetdispnet): ["FlowNet 2.0: Evolution of Optical Flow Estimation with Deep Networks"](https://arxiv.org/abs/1612.01925)
+  * [GC-Net](#gc-net): ["End-to-End Learning of Geometry and Context for Deep Stereo Regression"](https://arxiv.org/abs/1703.04309)
 
 ## A generic framework for stereo DNN
 
