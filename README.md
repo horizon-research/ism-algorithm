@@ -4,9 +4,9 @@ This ISM algorithm is an algorithm framework to accelerate a general stereo visi
 
 We provide some implementation of ISM algorithm for several popular stereo DNNs.
 
-  * [PSMNet](#psmnet)
-  * [FlowNet/DispNet](#flownetdispnet)
-  * [GC-Net](#gc-net)
+  * [PSMNet](#psmnet): [\[paper\]]
+  * [FlowNet/DispNet](#flownetdispnet): [\[paper\]]
+  * [GC-Net](#gc-net): [\[paper\]]
 
 ## A generic framework for stereo DNN
 
