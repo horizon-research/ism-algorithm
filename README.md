@@ -1,16 +1,16 @@
-# ISM_algorithm
+# ISM: Invariant-based Stereo Matching
 
-This ISM algorithm is an algorithm framework to accelerate a general stereo vision DNN using Invariant-based Stereo Matching for continuous stereo vision application from our paper, *ASV: Accelerated Stereo Vision System*.
+ISM is not a particular stereo matching algorithm. Rather, it is a generic **algorithmic framework** that accelerates any existing DNN-based stereo matching algorithm using what we call "stereo invariants". This reposity contains the software code that you can use to reproduce the accuracy results in our MICRO 2019 paper [ASV: Accelerated Stereo Vision System](http://cs.rochester.edu/horizon/pubs/micro19-asv.pdf).
 
 We provide some implementation of ISM algorithm for several popular stereo DNNs.
 
-  * [PSMNet](#psmnet): "Pyramid Stereo Matching Network" [[link]](https://arxiv.org/abs/1803.08669)
-  * [FlowNet/DispNet](#flownetdispnet): "FlowNet 2.0: Evolution of Optical Flow Estimation with Deep Networks" [[link]](https://arxiv.org/abs/1612.01925)
-  * [GC-Net](#gc-net): "End-to-End Learning of Geometry and Context for Deep Stereo Regression" [[link]](https://arxiv.org/abs/1703.04309)
+  * [PSMNet](#psmnet): "Pyramid Stereo Matching Network", CVPR 2017 [[pdf]](https://zpascal.net/cvpr2017/Ilg_FlowNet_2.0_Evolution_CVPR_2017_paper.pdf)
+  * [FlowNet/DispNet](#flownetdispnet): "FlowNet 2.0: Evolution of Optical Flow Estimation with Deep Networks", CVPR 2018 [[pdf]](http://openaccess.thecvf.com/content_cvpr_2018/papers/Chang_Pyramid_Stereo_Matching_CVPR_2018_paper.pdf)
+  * [GC-Net](#gc-net): "End-to-End Learning of Geometry and Context for Deep Stereo Regression", ICCV 2017 [[pdf]](http://openaccess.thecvf.com/content_ICCV_2017/papers/Kendall_End-To-End_Learning_of_ICCV_2017_paper.pdf)
 
-## A generic framework for stereo DNN
+## A generic framework for accelerating stereo vision
 
-In the `ism_skeleton.py`, it gives a skeleton code for using Invariant-based motion compensation with any Stereo DNN model. It contains the main bone to implement our ISM algorithm to other stereo DNNs. There are several steps in TODO list in order to make this algorithm works.
+In the `ism_skeleton.py`, it gives a skeleton code for using ISM with any stereo DNN model. It contains the main bone to implement our ISM algorithm to other stereo DNNs. There are several steps in TODO list in order to make this algorithm works.
 
 First, you need to download a stereo vision dataset. For this, we recommend [KITTI dataset](http://www.cvlibs.net/datasets/kitti/eval_depth_all.php) and [SceneFlow dataset](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html) and pass the path to the skeleton code.
 
@@ -20,7 +20,7 @@ Second, download any stereo vision DNN network to test this code. In the `ism_sk
 
 Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames. Other dense optical flow algrithm can also be used to substitute this function. The optical flow algorithm is used in one stage of ISM algorithm to get the disparity map from next subsequent frames.
 
-## Implementation for popular stereo DNNs
+## Implementations of ISM with popular stereo vision DNNs
 
 In the directory `stereo_script`, it contains several scripts that we applied our methods on four representative stereo DNNs. Here are some detailed instructions to run these scripts.
 
@@ -175,7 +175,7 @@ The ${PATH} is the path lead to one particular dataset.
 
 You can also use our script `test_dataset` to run multiple dataset together.
 
-## Citing
+## Cite
 
 This project is a artifact of our 2019 MICRO paper:
 
