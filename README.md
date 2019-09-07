@@ -1,14 +1,26 @@
 # ISM_algorithm
 
-This ISM algorithm is a plug-in supportive repository to accelerate a general stereo vision DNN using Invariant-based Stereo Matching for continuous stereo vision application from our paper, *ASV: Accelerated Stereo Vision System*.
+This ISM algorithm is an algorithm framework to accelerate a general stereo vision DNN using Invariant-based Stereo Matching for continuous stereo vision application from our paper, *ASV: Accelerated Stereo Vision System*.
 
-We provide some plug-in scripts for several popular stereo DNNs.
+We provide some implementation of ISM algorithm for several popular stereo DNNs.
 
   * PSMNet
   * FlowNet/DispNet
   * GC-Net
 
-## Plug-in scripts
+## A generic framework for stereo DNN
+
+In the `ism_skeleton.py`, it gives a skeleton code for using Invariant-based motion compensation with any Stereo DNN model. It contains the main bone to implement our ISM algorithm to other stereo DNNs. There are several steps in TODO list in order to make this algorithm works.
+
+First, you need to download a stereo vision dataset. For this, we recommend [KITTI dataset](http://www.cvlibs.net/datasets/kitti/eval_depth_all.php) and [SceneFlow dataset](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html) and pass the path to the skeleton code.
+
+Second, download any stereo vision DNN network to test this code. In the `ism_skeleton.py`, you need to implement the functions `load_dnn_model` and `dnn_inference` to be able to load the stereo DNN model and use the stereo DNN model to geneerate disparity results from key frames.
+
+### Some details about this skeleton code
+
+Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames. Other dense optical flow algrithm can also be used to substitute this function. The optical flow algorithm is used in one stage of ISM algorithm to get the disparity map from next subsequent frames.
+
+## Implementation for popular stereo DNNs
 
 In the directory `stereo_script`, it contains several scripts that we applied our methods on four representative stereo DNNs. Here are some detailed instructions to run these scripts.
 
@@ -162,19 +174,6 @@ $ ./gcnet_with_ism.py \
 The ${PATH} is the path lead to one particular dataset.
 
 You can also use our script `test_dataset` to run multiple dataset together.
-
-
-## Implement your own ISM
-
-In the `ism_skeleton.py`, it gives a skeleton code for using Invariant-based motion compensation with any Stereo DNN model. There are several steps in TODO list in order to make this algorithm works.
-
-First, you need to download a stereo vision dataset. For this, we recommend [KITTI dataset](http://www.cvlibs.net/datasets/kitti/eval_depth_all.php) and [SceneFlow dataset](https://lmb.informatik.uni-freiburg.de/resources/datasets/SceneFlowDatasets.en.html) and pass the path to the skeleton code.
-
-Second, download any stereo vision DNN network to test this code. In the `ism_skeleton.py`, you need to implement the functions `load_dnn_model` and `dnn_inference` to be able to load the stereo DNN model and use the stereo DNN model to geneerate disparity results from key frames.
-
-### Some details about this skeleton code
-
-Inside of this skeleton script, we used `OpticalFlowFarneback` in OpenCV to compensate motions across adjacent frames. Other dense optical flow algrithm can also be used to substitute this function. The optical flow algorithm is used in one stage of ISM algorithm to get the disparity map from next subsequent frames.
 
 ## Citing
 
